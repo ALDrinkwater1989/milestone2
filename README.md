@@ -1,18 +1,33 @@
+# Graphical representation of gaming habits
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## Introduction
 
 
-Hi there! Welcome to Cloud9 IDE!
 
-To get you started, create some files, play with the terminal,
-or visit http://docs.c9.io for our documentation.
-If you want, you can also go watch some training videos at
-http://www.youtube.com/user/c9ide.
+## UX
 
-Happy coding!
-The Cloud9 IDE team
+## User Stories
+
+### Mockups
+
+## Featu## Existing Features
+
+### Future Implementations
+
+In the future I would like to implement an API connection to Google Sheets so that any new responses would automatically
+
+## Technologies Used
+
+## Testing
+
+## Known Bugs
+
+## Deployment
+
+## Credits
+
+## Content
+
+## Media
+
+## Acknowledgements

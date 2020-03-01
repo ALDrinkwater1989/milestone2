@@ -1,5 +1,5 @@
 queue()
-    .defer(d3.csv, "data/games.csv")
+    .defer(d3.csv,"data/games.csv")
     .await(makeGraphs);
 
 function makeGraphs(error, gameData) {
@@ -10,6 +10,8 @@ function makeGraphs(error, gameData) {
         d.hours_playing = parseInt(d["hours_playing"]);
         d.years_playing = parseInt(d["years_playing"]);
         d.monthly_budget = parseInt(d["monthly_budget"]);
+        
+     
     });
 
 
@@ -18,6 +20,7 @@ function makeGraphs(error, gameData) {
     show_age_dist(ndx);
     show_favourite_activity(ndx);
     show_games_played(ndx);
+    show_playstyle(ndx);
  
 
 
@@ -82,6 +85,29 @@ function show_favourite_activity(ndx){
         .yAxis().ticks(10);
 }
 
+function show_playstyle(ndx){
+     var dim = ndx.dimension(dc.pluck('play_style'));
+    var group = dim.group();
+    
+    dc.barChart("#playstyle")
+        .width(400)
+        .height(250)
+        .margins({top: 30, right: 50, bottom: 80, left: 50})
+        .renderlet(function (chart) {
+                    chart.selectAll("g.x text")
+                      .attr('dx', '-40')
+                      .attr('transform', "rotate(-45)");
+                })
+        .dimension(dim)
+        .group(group)
+        .transitionDuration(500)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel("Activity")
+        .yAxis().ticks(10);
+}
+
+
 
 function show_games_played(ndx){
     var dim = ndx.dimension(dc.pluck('games_played'));
@@ -95,4 +121,20 @@ function show_games_played(ndx){
         .group(group)
         .dimension(dim)
         
+}
+
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("tkBtn");
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function(){
+    modal.style.display = "block";
+
+}
+
+window.onclick = function(event){
+    if(event.target == modal){
+    modal.style.display = "none";
+    }
 }
