@@ -1,5 +1,5 @@
 queue()
-    .defer(d3.csv,"data/games.csv")
+    .defer(d3.json,"https://sheet.best/api/sheets/b0eb5319-377e-419f-8c19-0a1bbc62a116")
     .await(makeGraphs);
 
 function makeGraphs(error, gameData) {
