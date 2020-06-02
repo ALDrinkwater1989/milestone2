@@ -68,7 +68,7 @@ function show_favourite_activity(ndx){
     var group = dim.group();
     
     dc.barChart("#fav-activity")
-        .width(400)
+        .width(350)
         .height(250)
         .margins({top: 30, right: 50, bottom: 80, left: 50})
         .renderlet(function (chart) {
@@ -90,7 +90,7 @@ function show_playstyle(ndx){
     var group = dim.group();
     
     dc.barChart("#playstyle")
-        .width(400)
+        .width(350)
         .height(250)
         .margins({top: 30, right: 50, bottom: 80, left: 50})
         .renderlet(function (chart) {
@@ -121,4 +121,8 @@ function show_games_played(ndx){
         .group(group)
         .dimension(dim)
         
+}
+
+function show_gender_percentage(ndx, gender, element){
+    
 }

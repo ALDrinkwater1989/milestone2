@@ -10,7 +10,9 @@
 
 ### Mockups
 
-## Featu## Existing Features
+## Features
+
+## Existing Features
 
 ### Future Implementations
 
