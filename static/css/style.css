@@ -1,12 +1,10 @@
-.x-axis-label, .axis, .y, .x{
-    fill: #ffffff;
-    padding: 10px;
+.pie-slice{
+    color: #fff;
 }
 
-.dc-chart .axis line, .dc-chart .axis path{
+ .dc-chart .axis line, .dc-chart .axis path .{
     stroke: #fff;
 }
-
 
 .section{
     border-bottom: 1px solid #fafafa;
