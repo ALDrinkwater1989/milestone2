@@ -2,7 +2,7 @@
 
 .set-background {
     background-color: #888;
-    background-image: url("../images/comic_bg.jpg");
+    background-image: url("../images/StarWarsWp.png");
     background-position: center center;
 }
 
@@ -37,6 +37,37 @@ p {
 }
 
 
+.eq-column-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row [class*=col-]{
+    margin:0 -.3px;
+}
+
+.inline-link {
+    color: #bf0d1c;
+    transition: all .2s ease-in-out
+}
+
+.inline-link:focus,
+.inline-link:hover {
+    color: #bf0d1c;
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+.dropdown-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
 /*----------------Colours----------*/
 
 .pink{
@@ -50,3 +81,46 @@ p {
 .green{
     color: greenyellow;
 }
+
+
+
+
+/*------------Footer-----------*/
+
+
+
+.footer {
+    min-height: 50px;
+    margin-top: 12.5px;
+    background-color: black;
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+}
+
+.kaggle-logo {
+    height: 1.25em;
+}
+
+.kaggle-logo:focus,
+.kaggle-logo:hover {
+    opacity: 0.8;
+}
+
+
+.github-logo {
+    color: blue;
+    font-size: 2em;
+    padding: 8px 0;
+    transition: all .2s ease-in-out
+}
+
+.github-logo:focus,
+.github-logo:hover {
+    color: #e5462d;

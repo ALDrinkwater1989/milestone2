@@ -25,9 +25,28 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Beakdown of gaming habits</a>
+				<a class="navbar-brand" href="#">Star Wars Dashboard</a>
+			</div>
+			<div class="dropdown-filter">
+				<div> Filter By Character: </div>
+				<div id="character-selector"></div>
+			</div>
+			<div class="dropdown-filter">
+				<div> Filter By gender: </div>
+				<div id="gender-selector"></div>
+			</div>
+			<div class="dropdown-filter">
+				<div> Filter By Film: </div>
+				<div id="film-selector"></div>
+			</div>
+			<div class="dropdown-filter">
+				<div> Filter By alligence: </div>
+				<div id="alligence-selector"></div>
 			</div>
 	</nav>
+
+
+
 	<!--Introduction-->
 	<section class="container set-min-height">
 		<div class="row eq-col-height">
@@ -37,13 +56,9 @@
 					<h3 class="heading-h3">Introduction<h3>
 							<div class="hide-content-toggle">
 								<hr>
-								<p>
+								<p> This page contains data about the characters in the Star wars universe.
 								</p>
 								</hr>
-							</div>
-							<div class="dropdown-filter">
-								<div> Filter By Gender: </div>
-								<div id="gender-selector"></div>
 							</div>
 				</div>
 
@@ -76,125 +91,123 @@
 										</div>
 									</div>
 								</div>
-                                <p class = "gender-text">The number of men who play Detiny and other games vastly outnumbers the number of women who do.</p>
-
-
 								</hr>
 								<div class="col-sm-12 col-md-3" id="gender-balance"></div>
-								<div class="dropdown-filter">
-									<div>Filter data by gender</div>
-									<div id="gender-selector"></div>
-								</div>
-                                	<div class="col-sm-12 col-md-3" id="age-dist"></div>
+								<div class="col-sm-12 col-md-3" id="age-dist"></div>
 							</div>
 				</div>
 			</article>
-              <!-- Alignment -->
-            <article class="col-xs-12 col-sm-6 col-lg-4 eq-column-height">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Alignment</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="alignment" class="chart"></div>
-                        <p>The good guys outnumber the rest by almost 2 to 1 - makes you wonder how they make it look so difficult all the time!</p>
-                        <p>When filtering by male & female, there is a clear difference. 1 in 3 males are bad, but for females it's less than 1 in 5.</p>
-                    </div>
-                </div>
-            </article>
-        </div>
+			<!-- Alignment -->
+			<article class="col-xs-12 col-sm-6 col-lg-4 eq-column-height">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Alignment</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="alligence" class="chart"></div>
+					</div>
+				</div>
+			</article>
+		</div>
 		</div>
 
-         <div class="row">
-            <!-- Stats Row Chart -->
-            <article class="col-xs-12">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Super Hero Attributes</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="stats" class="chart"></div>
-                        <p>The line charts above show the 6 main attributes ranked from 0 to 100. The charts record the frequency of each attribute across all heroes.</p>
-                        <p>There is a lot that can be taken away from these charts but what is immediately noticeable is the spike in the strength attribute at the lower levels. This would imply a lot of heroes rely on their super powers and combat ability
-                            over raw strength, and this assumption appears to be backed up by data in the rest of the chart.</p>
-                        <p>Additionally, the lack of any 'intellectually challenged' superheroes, those with an intelligence attribute of 30 or lower, and also the surge at 70 and above, reinforces the observation that our heroes prefer brains over brawn.</p>
-                    </div>
-                </div>
-            </article>
-        </div>
+		<div class="row">
+			<!-- Films Chart -->
+			<article class="col-xs-12">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Films</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="anh" class="chart"></div>
+						<div id="esb" class="chart"></div>
+						<div id="roj" class="chart"></div>
+						<div id="tpm" class="chart"></div>
+						<div id="atc" class="chart"></div>
+						<div id="ros" class="chart"></div>
+						<div id="tfa" class="chart"></div>
+						<div id="tlj" class="chart"></div>
+						<div id="ros" class="chart"></div>
 
-        <div class="row eq-column-height">
-            <!-- Height Bar Chart -->
-            <article class="col-xs-12 col-sm-6 eq-column-height">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Height</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="height" class="chart"></div>
-                        <p>No real surprises here, the vast majority of our heroes are between 1m and 2m tall, with very few extremes either side of 1m and 3m.</p>
-                        <p>If we look at just the tall guys, those over 2m high, you can see a slight shift in the attribute spread towards the higher values, indicating that generally, the taller you are, the better your attributes. </p>
-                    </div>
-                </div>
-            </article>
-            <!-- Weight Bar Chart -->
-            <article class="col-xs-12 col-sm-6 eq-column-height">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Weight</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="weight" class="chart"></div>
-                        <p>Weight distribution amongst our heroes is a little more evenly distributed than their heights. </p>
-                        <p>The taller / more powerful connection from the height chart carries over to the weights too. Looking at just heroes over 120kg, you can see the heavier guys most definitely retain the better attribute spread.</p>
-                    </div>
-                </div>
-            </article>
-        </div>
-         <!-- Hair Color Pie Chart -->
-            <article class="col-xs-12 col-sm-6 col-md-6 eq-column-height">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Hair Color</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="hair-color" class="chart"></div>
-                        <p>Most of our heroes seem to be playing it safe with their choice of hair color, with over 60% opting for a traditional black, blond, or brown color.</p>
-                        <p>Even safer still, heroes with blond hair, have a massive 85% chance of having blue eyes.</p>
-                    </div>
-                </div>
-            </article>
-            <!-- Eye Color Pie Chart -->
-            <article class="col-xs-12 col-sm-6 col-md-6 eq-column-height">
-                <div class="content-wrapper">
-                    <div><i class="fas fa-angle-up hide-content-btn"></i></div>
-                    <h3 class="heading--h3">Eye Color</h3>
-                    <div class="hide-content-toggle">
-                        <hr>
-                        <div id="eye-color" class="chart"></div>
-                       
-                    </div>
-                </div>
-            </article>
-        </div>
 
+
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div class="row eq-column-height">
+			<!-- Height Bar Chart -->
+			<article class="col-xs-12 col-sm-6 eq-column-height">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Height</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="height" class="chart"></div>
+
+					</div>
+				</div>
+			</article>
+			<!-- Weight Bar Chart -->
+			<article class="col-xs-12 col-sm-6 eq-column-height">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Weight</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="weight" class="chart"></div>
+
+					</div>
+				</div>
+			</article>
+		</div>
+		<div class="row eq-column-height">
+			<!-- Hair Color Pie Chart -->
+			<article class="col-xs-12 col-sm-6 col-md-6 eq-column-height">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Hair Color</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="hair-color" class="chart"></div>
+
+					</div>
+				</div>
+			</article>
+			<!-- Eye Color Pie Chart -->
+			<article class="col-xs-12 col-sm-6 col-md-6 eq-column-height">
+				<div class="content-wrapper">
+					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
+					<h3 class="heading-h3">Eye Color</h3>
+					<div class="hide-content-toggle">
+						<hr>
+						<div id="eye-color" class="chart"></div>
+
+					</div>
+				</div>
+			</article>
+		</div>
+		</div>
 	</section>
-  <!--Footer -->
-    <footer class="container-fluid footer">
-        <div class="container">
-            <div class="row footer-content">
-                <div class="col-xs-12 col-sm-4">
-                    <div>&copy;2020 Alex Drinkwater</div>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <a href="" target="_blank"><i class="fab fa-github github-logo"></i></a>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <div>Original unmodified dataset sourced from <span><a href="https://www.kaggle.com/thec03u5/complete-superhero-dataset" target="_blank"><img src="static/images/kaggle.png" alt="kaggle.com" class="kaggle-logo"></a></span>.</div>
-                </div>
-            </div>
-        </div>
-    </footer>
+	<!--Footer -->
+	<footer class="container-fluid footer">
+		<div class="container">
+			<div class="row footer-content">
+				<div class="col-xs-12 col-sm-4">
+					<div>&copy;2020 Alex Drinkwater</div>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<a href="" target="_blank"><i class="fab fa-github github-logo"></i></a>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div>Original unmodified dataset sourced from
+						<span><a href="https://www.kaggle.com/jsphyg/star-wars" target="_blank"><img src="static/images/kaggle.png" alt="kaggle.com" class="kaggle-logo"></a></span>.
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<!-- must load in this order: D3 | CROSSFILTER | DC -->

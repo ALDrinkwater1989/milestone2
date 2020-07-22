@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    d3.json("https://sheet.best/api/sheets/b0eb5319-377e-419f-8c19-0a1bbc62a116").then(chartBuilder);
+    d3.json("https://sheet.best/api/sheets/1ANXm9uSUmh9Eaj517GbOzkBA6HTI8Ze8EQam77ybOyk").then(chartBuilder);
     dc.config.defaultColors(d3.schemePRGn[11]);
 
-    function chartBuilder(gameData) {
-        var ndx = crossfilter(gameData);
+    function chartBuilder(swData) {
+        var ndx = crossfilter(swData);
         let allData = ndx.groupAll();
 
         dc.dataCount("#total")
@@ -11,18 +11,18 @@ $(document).ready(function () {
             .groupAll(allData);
 
 
-        gameData.forEach(function (d) {
-            d.days_playing = parseInt(d.days_playing);
-            d.hours_playing = parseInt(d["hours_playing"]);
-            d.years_playing = parseInt(d["years_playing"]);
-            d.monthly_budget = parseInt(d["monthly_budget"]);
+        swData.forEach(function (d) {
+            d.height = parseInt(d["height"]);
+            d.mass = parseInt(d["mass"]);
+            
+            
 
 
         });
 
 
         show_favourite_activity(ndx), "#favourite-activity", "fav_activity";
-        show_games_played(ndx, "#games-played", "games_played");
+        show_alligence(ndx, "#alligence", "Alligence");
         show_gender_balance(ndx, "#gender-balance", "gender");
         show_age_dist(ndx, "#age-dist", "age");
         show_playstyle(ndx, "#playstyle", "play_style");
@@ -32,7 +32,7 @@ $(document).ready(function () {
         dc.renderAll();
     }
 
-    function show_games_played(ndx, divName, dimension) {
+    function show_alligence(ndx, divName, dimension) {
 
         let gamesPiechart = dc.pieChart(divName);
         let dim = ndx.dimension(dc.pluck(dimension));
