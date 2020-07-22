@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Star Wars Dashboard</title>
 
 	<link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" type="text/css"
@@ -13,8 +13,12 @@
 	<link rel="stylesheet" href="static/css/style.css" type="text/css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
 		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-
+                                
+                                <!--SCRIPTS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
 
 
 
@@ -56,7 +60,7 @@
 					<h3 class="heading-h3">Introduction<h3>
 							<div class="hide-content-toggle">
 								<hr>
-								<p> This page contains data about the characters in the Star wars universe.
+								<p class = "intro"> This page contains data about the characters in the Star wars universe.
 								</p>
 								</hr>
 							</div>
@@ -97,11 +101,11 @@
 							</div>
 				</div>
 			</article>
-			<!-- Alignment -->
+			<!-- Alligence -->
 			<article class="col-xs-12 col-sm-6 col-lg-4 eq-column-height">
 				<div class="content-wrapper">
 					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
-					<h3 class="heading-h3">Alignment</h3>
+					<h3 class="heading-h3">Alligence</h3>
 					<div class="hide-content-toggle">
 						<hr>
 						<div id="alligence" class="chart"></div>
@@ -119,18 +123,21 @@
 					<h3 class="heading-h3">Films</h3>
 					<div class="hide-content-toggle">
 						<hr>
-						<div id="anh" class="chart"></div>
-						<div id="esb" class="chart"></div>
-						<div id="roj" class="chart"></div>
-						<div id="tpm" class="chart"></div>
-						<div id="atc" class="chart"></div>
-						<div id="ros" class="chart"></div>
-						<div id="tfa" class="chart"></div>
-						<div id="tlj" class="chart"></div>
-						<div id="ros" class="chart"></div>
-
-
-
+						<div class="row">
+							<div id="anh" class="chart"></div>
+							<div id="esb" class="chart"></div>
+							<div id="roj" class="chart"></div>
+						</div>
+						<div class="row">
+							<div id="tpm" class="chart"></div>
+							<div id="atc" class="chart"></div>
+							<div id="ros" class="chart"></div>
+						</div>
+						<div class="row">
+							<div id="tfa" class="chart"></div>
+							<div id="tlj" class="chart"></div>
+							<div id="ros" class="chart"></div>
+						</div>
 					</div>
 				</div>
 			</article>
@@ -211,9 +218,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<!-- must load in this order: D3 | CROSSFILTER | DC -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.4.6/crossfilter.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.js"></script>
+
 	<script src="static/js/graph.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">

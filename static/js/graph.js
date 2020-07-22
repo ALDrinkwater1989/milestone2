@@ -1,170 +1,113 @@
-$(document).ready(function () {
-    d3.json("https://sheet.best/api/sheets/1ANXm9uSUmh9Eaj517GbOzkBA6HTI8Ze8EQam77ybOyk").then(chartBuilder);
-    dc.config.defaultColors(d3.schemePRGn[11]);
+queue()
+    .defer(d3.csv, 'static/data/characters.csv')
+    .await(chartBuilder);
 
     function chartBuilder(swData) {
         var ndx = crossfilter(swData);
-        let allData = ndx.groupAll();
 
-        dc.dataCount("#total")
-            .crossfilter(ndx)
-            .groupAll(allData);
-
-
-        swData.forEach(function (d) {
+      swData.forEach(function (d) {
             d.height = parseInt(d["height"]);
             d.mass = parseInt(d["mass"]);
-            
-            
 
+      });
 
+/*----------Character Selector----------*/
+
+character_selector(ndx);
+
+    /* ---------- Gender Percent ---------*/
+    gender_selector(ndx);
+    display_gender_percent(ndx, 'Male', '#percent-male');
+    display_gender_percent(ndx, 'Female', '#percent-female');
+    display_gender_percent(ndx, 'Other', '#percent-other');
+
+    /* ---------- Pie Charts -------------*/
+    alligence(ndx);
+    a_new_hope(ndx);
+    empire_strikes_back(ndx);
+    return_of_the_jedi(ndx);
+    phantom_menace(ndx);
+    attack_of_the_clones(ndx);
+    revenge_of_the_sith(ndx);
+    the_force_awakens(ndx);
+    the_last_jedi(ndx);
+    rise_of_skywalker(ndx);
+    hair_color(ndx);
+    eye_color(ndx);
+
+      /* ---------- Bar Charts -------------*/
+    height(ndx);
+    weight(ndx);
+
+    dc.renderAll();
+}
+
+/*---------------------SELECTORS-----------------*/
+
+/*--Here are all the selector functions that are used on the page--*/
+
+/*-------Character selector------*/
+
+function character_selector(ndx){
+    var characterDim = ndx.dimension(dc.pluck('name'));
+    var characterGroup = characterDim.group();
+
+    dc.selectMenu('#character-selector')
+        .dimension(characterDim)
+        .group(characterGroup)
+        .title(function(d){
+            return d.key;
         });
+}
 
+/*---Gender Selector---*/
 
-        show_favourite_activity(ndx), "#favourite-activity", "fav_activity";
-        show_alligence(ndx, "#alligence", "Alligence");
-        show_gender_balance(ndx, "#gender-balance", "gender");
-        show_age_dist(ndx, "#age-dist", "age");
-        show_playstyle(ndx, "#playstyle", "play_style");
-        show_months_budget(ndx, "#budget-scatter", "monthly_budget")
+function gender_selector(ndx){
+    var genderDim = ndx.dimension(dc.pluck('gender'));
+    var genderGroup = genderDim.group();
 
+    dc.selectMenu('#gender-selector')
+        .dimension(genderDim)
+        .group(genderGroup);
+}
 
-        dc.renderAll();
-    }
+function display_gender_percent(ndx, gender, element){
+    var genderPercent = ndx.groupAll().reduce(
+        function(p, v){
+            p.toatl++;
+            if(v.gender === gender){
+                p/gender_count--;
+            }
+            return p;
 
-    function show_alligence(ndx, divName, dimension) {
+        },
+        function(){
+            return {total: 0, gender_count: 0};
+        }
+    );
 
-        let gamesPiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = dim.group();
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
+    dc.numberDisplay(element)
+        .formatNumber(dc.format('.2%'))
+        .valueAccessor(function(d) {
+            if (d.gender_count == 0){
+                return 0;
+            }
+            else {
+                return(d.gender_count / d.total);
+            }
         })
-
-        gamesPiechart
-            .height(330)
-            .radius(180)
-            .transitionDuration(500)
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .externalLabels(50)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-});
-
-function show_gender_balance(ndx, divName, dimension) {
-    var genderBarChart = dc.barChart(divName);
-    var dim = ndx.dimension(dc.pluck(dimension));
-    var group = dim.group();
-
-    genderBarChart
-        .width(350)
-        .height(250)
-        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-        .x(d3.scaleBand())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Gender")
-        .yAxis().ticks(20);
+        .group(genderPercent);
 }
 
+/*----alligence selector-----*/
 
-function show_age_dist(ndx, divName, dimension) {
-    var ageBarChart = dc.barChart(divName);
-    var dim = ndx.dimension(dc.pluck(dimension));
-    var group = dim.group();
+function alligence_selector(ndx){
+    var alligenceDim = ndx.dimension(dc.pluck('alligence'));
+    var alligenceGroup = alligenceDim.group();
 
-
-    ageBarChart
-        .width(350)
-        .height(250)
-        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-        .x(d3.scaleBand())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Age")
-        .yAxis().ticks(10);
+    dc.selectMenu('#alligence-selector')
+        .dimension(alligenceDim)
+        .group(alligenceGroup);
 }
 
-
-function show_favourite_activity(ndx) {
-    var dim = ndx.dimension(dc.pluck('favourite_activity'));
-    var group = dim.group();
-
-    dc.barChart("#fav-activity")
-        .width(350)
-        .height(250)
-        .margins({ top: 30, right: 50, bottom: 80, left: 50 })
-        .renderlet(function (chart) {
-            chart.selectAll("g.x text")
-                .attr('dx', '-40')
-                .attr('transform', "rotate(-45)");
-        })
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-         .x(d3.scaleBand())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Activity")
-        .yAxis().ticks(10);
-}
-
-function show_playstyle(ndx) {
-    var dim = ndx.dimension(dc.pluck('play_style'));
-    var group = dim.group();
-
-    dc.barChart("#playstyle")
-        .width(350)
-        .height(250)
-        .margins({ top: 30, right: 50, bottom: 80, left: 50 })
-        .renderlet(function (chart) {
-            chart.selectAll("g.x text")
-                .attr('dx', '-40')
-                .attr('transform', "rotate(-45)");
-        })
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-         .x(d3.scaleBand())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Activity")
-        .yAxis().ticks(10);
-}
-
-
-function show_months_budget(ndx, divName, dimension) {
-    var scatterPlot = dc.scatterPlot(divName);
-    var dim = ndx.dimension(dc.pluck(dimension))
-    var budgetDim = ndx.dimension(function (d) {
-        return [d.years_playing, d.monthly_budget, d.gender, d.age];
-    });
-
-    var group = budgetDim.group()
-    var minAge = dim.bottom(1)[0].years_playing;
-    var maxAge = dim.top(1)[0].years_playing;
-
-    scatterPlot
-        .dimension(dim)
-        .group(group)
-        .width(800)
-        .height(400)
-        .x(d3.scaleLinear().domain([minAge, maxAge]))
-        .brushOn(false)
-        .symbolSize(8)
-        .clipPadding(10)
-        .yAxisLabel("Budget")
-        .xAxisLabel("Years playing games")
-        
-
-    }
+/*-------Pie Charts-----*/
