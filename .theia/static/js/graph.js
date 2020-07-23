@@ -6,8 +6,8 @@ queue()
         var ndx = crossfilter(swData);
 
       swData.forEach(function (d) {
-            d.height = parseInt(d["height"]);
-            d.mass = parseInt(d["mass"]);
+            d.height = parseInt(d.height);
+            d.mass = parseInt(d.mass);
 
       });
 
@@ -22,7 +22,7 @@ character_selector(ndx);
     display_gender_percent(ndx, 'Other', '#percent-other');
 
     /* ---------- Pie Charts -------------*/
-    alligence(ndx);
+  /*  alligence(ndx);
     a_new_hope(ndx);
     empire_strikes_back(ndx);
     return_of_the_jedi(ndx);
@@ -110,4 +110,55 @@ function alligence_selector(ndx){
         .group(alligenceGroup);
 }
 
+/*--------Film Selector---*/
+
+function film_selector(ndx){
+    var filmDim = ndx.dimension(dc.pluck('films'));
+    var filmGroup = filmDim.group();
+
+    dc.selectMenu("#film-selector")
+        .dimension(filmDim)
+        .group(filmGroup);
+}
+
+/*---------------------SELECTORS END---------------*/
+
 /*-------Pie Charts-----*/
+
+
+/*----Bar Charts----*/
+
+function height(ndx){
+    var dim = ndx.dimension(dc.pluck('height'));
+    var group = dim.group();
+
+    dc.barChart("#height")
+        .width(350)
+        .height(250)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(dim)
+        .group(group)
+        .transitionDuration(500)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel("Height(CM)")
+        .yAxis().ticks(20);
+}
+
+function mas(ndx){
+        var dim = ndx.dimension(dc.pluck('mass'));
+    var group = dim.group();
+
+    dc.barChart("#weight")
+        .width(350)
+        .height(250)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(dim)
+        .group(group)
+        .transitionDuration(500)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel("Weight (KG)")
+        .yAxis().ticks(20);
+}
+
