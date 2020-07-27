@@ -20,14 +20,90 @@ $(document).ready(function () {
 
 
 
+        gender_selector(ndx, "#gender-selector", "gender");
+        gender_selector(ndx, "#character-selector", "name");
+        gender_selector(ndx, "#alligence-selector", "Alligence");
+        gender_selector(ndx, "#film-selector", "film");
+
+
+
 
         show_alligence(ndx, "#alligence", "Alligence");
+        
+        
+        
+        
         show_weight(ndx, "#weight");
 
 
 
         dc.renderAll();
     }
+
+    /*--------------SELECTORS START-----*/
+
+    function gender_selector(ndx, divName, dimension) {
+        var dim = ndx.dimension(dc.pluck(dimension));
+        var group = dim.group();
+        var genderSelect = dc.selectMenu(divName)
+
+        genderSelect
+            .dimension(dim)
+            .group(group)
+            .title(function (d) {
+                return d.key
+            });
+
+
+    }
+
+    function character_selector(ndx, divName, dimension) {
+        var dim = ndx.dimension(dc.pluck(dimension));
+        var group = dim.group();
+        var characterSelect = dc.selectMenu(divName)
+
+        characterSelect
+            .dimension(dim)
+            .group(group)
+            .title(function (d) {
+                return d.key
+            });
+
+
+    }
+
+    function alligence_selector(ndx, divName, dimension) {
+        var dim = ndx.dimension(dc.pluck(dimension));
+        var group = dim.group();
+        var alligenceSelect = dc.selectMenu(divName)
+
+        alligenceSelect
+            .dimension(dim)
+            .group(group)
+            .title(function (d) {
+                return d.key
+            });
+
+
+    }
+    function film_selector(ndx, divName, dimension) {
+        var dim = ndx.dimension(dc.pluck(dimension));
+        var group = dim.group();
+        var filmSelect = dc.selectMenu(divName)
+
+        filmSelect
+            .dimension(dim)
+            .group(group)
+            .title(function (d) {
+                return d.key
+            });
+
+
+    }
+
+
+    /*------------SELECTORS END-------------*/
+
     /*----------------------PIE CHARTS START-----------*/
 
     /*------Pie chart formatting----*/
