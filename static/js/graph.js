@@ -1,164 +1,122 @@
-queue()
-    .defer(d3.csv, 'static/data/characters.csv')
-    .await(chartBuilder);
+$(document).ready(function () {
+
+
+    d3.csv("./static/data/characters.csv").then(chartBuilder);
+    dc.config.defaultColors(d3.schemeRdBu[11]);
 
     function chartBuilder(swData) {
         var ndx = crossfilter(swData);
+        let allData = ndx.groupAll();
 
-      swData.forEach(function (d) {
+        dc.dataCount("#total")
+            .crossfilter(ndx)
+            .groupAll(allData);
+
+
+        swData.forEach(function (d) {
             d.height = parseInt(d.height);
             d.mass = parseInt(d.mass);
-
-      });
-
-/*----------Character Selector----------*/
-
-character_selector(ndx);
-
-    /* ---------- Gender Percent ---------*/
-    gender_selector(ndx);
-    display_gender_percent(ndx, 'Male', '#percent-male');
-    display_gender_percent(ndx, 'Female', '#percent-female');
-    display_gender_percent(ndx, 'Other', '#percent-other');
-
-    /* ---------- Pie Charts -------------*/
-  /*  alligence(ndx);
-    a_new_hope(ndx);
-    empire_strikes_back(ndx);
-    return_of_the_jedi(ndx);
-    phantom_menace(ndx);
-    attack_of_the_clones(ndx);
-    revenge_of_the_sith(ndx);
-    the_force_awakens(ndx);
-    the_last_jedi(ndx);
-    rise_of_skywalker(ndx);
-    hair_color(ndx);
-    eye_color(ndx);
-
-      /* ---------- Bar Charts -------------*/
-    height(ndx);
-    weight(ndx);
-
-    dc.renderAll();
-}
-
-/*---------------------SELECTORS-----------------*/
-
-/*--Here are all the selector functions that are used on the page--*/
-
-/*-------Character selector------*/
-
-function character_selector(ndx){
-    var characterDim = ndx.dimension(dc.pluck('name'));
-    var characterGroup = characterDim.group();
-
-    dc.selectMenu('#character-selector')
-        .dimension(characterDim)
-        .group(characterGroup)
-        .title(function(d){
-            return d.key;
         });
-}
 
-/*---Gender Selector---*/
 
-function gender_selector(ndx){
-    var genderDim = ndx.dimension(dc.pluck('gender'));
-    var genderGroup = genderDim.group();
 
-    dc.selectMenu('#gender-selector')
-        .dimension(genderDim)
-        .group(genderGroup);
-}
 
-function display_gender_percent(ndx, gender, element){
-    var genderPercent = ndx.groupAll().reduce(
-        function(p, v){
-            p.toatl++;
-            if(v.gender === gender){
-                p/gender_count--;
-            }
-            return p;
+        show_alligence(ndx, "#alligence", "Alligence");
+        show_weight(ndx, "#weight");
 
-        },
-        function(){
-            return {total: 0, gender_count: 0};
+
+
+        dc.renderAll();
+    }
+    /*----------------------PIE CHARTS START-----------*/
+
+    /*------Pie chart formatting----*/
+
+    function show_slice_percent(key, endAngle, startAngle) {
+        var percent = dc.utils.printSingleValue((endAngle - startAngle) / (2 * Math.PI) * 100);
+
+        if (percent > 9) {
+            return key + ' | ' + Math.round(percent) + "%";
         }
-    );
+        else {
+            if (percent > 0) {
+                return Math.round(percent) + '%';
+            }
+        }
+    }
 
-    dc.numberDisplay(element)
-        .formatNumber(dc.format('.2%'))
-        .valueAccessor(function(d) {
-            if (d.gender_count == 0){
-                return 0;
-            }
-            else {
-                return(d.gender_count / d.total);
-            }
+    function show_alligence(ndx, divName, dimension) {
+
+        let gamesPiechart = dc.pieChart(divName);
+        let dim = ndx.dimension(dc.pluck(dimension));
+        let group = dim.group();
+
+        d3.selectAll("#resetPie").on("click", function () {
+            gamesPiechart.filterAll();
+            dc.redrawAll();
         })
-        .group(genderPercent);
-}
 
-/*----alligence selector-----*/
+        gamesPiechart
+            .width(500)
+            .height(350)
+            .radius(170)
+            .cx(210)
+            .transitionDuration(500)
+            .on('pretransition', function (chart) {
+                chart.selectAll('text.pie-slice').text(function (d) {
+                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
 
-function alligence_selector(ndx){
-    var alligenceDim = ndx.dimension(dc.pluck('alligence'));
-    var alligenceGroup = alligenceDim.group();
-
-    dc.selectMenu('#alligence-selector')
-        .dimension(alligenceDim)
-        .group(alligenceGroup);
-}
-
-/*--------Film Selector---*/
-
-function film_selector(ndx){
-    var filmDim = ndx.dimension(dc.pluck('films'));
-    var filmGroup = filmDim.group();
-
-    dc.selectMenu("#film-selector")
-        .dimension(filmDim)
-        .group(filmGroup);
-}
-
-/*---------------------SELECTORS END---------------*/
-
-/*-------Pie Charts-----*/
+                });
+            })
+            .useViewBoxResizing(true)
+            .group(group)
+            .dimension(dim)
+            .drawPaths(true)
+            .minAngleForLabel(0)
 
 
-/*----Bar Charts----*/
+    }
+    /*----------PIE CHARTS END----------*/
 
-function height(ndx){
-    var dim = ndx.dimension(dc.pluck('height'));
-    var group = dim.group();
+    /*----------BAR CHARTS START--------*/
+    function show_weight(ndx, divName) {
+        var weightChart = dc.barChart(divName);
+        var dim = ndx.dimension(function (d) {
+            switch (true) {
+                case (d.mass == 0):
+                    return "0KG";
+                case (d.mass < 60):
+                    return "0kg to 59kg";
+                case (d.mass < 90):
+                    return "60kg to 89kg";
+                case (d.mass < 120):
+                    return "90 to 119Kg";
+                case (d.mass >= 120):
+                    return "over 120 kg";
 
-    dc.barChart("#height")
-        .width(350)
-        .height(250)
-        .margins({top: 10, right: 50, bottom: 30, left: 50})
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Height(CM)")
-        .yAxis().ticks(20);
-}
+            }
+        });
+        var group = dim.group();
 
-function mas(ndx){
-        var dim = ndx.dimension(dc.pluck('mass'));
-    var group = dim.group();
+        weightChart
+            .width(500)
+            .height(350)
+            .x(d3.scaleLinear().domain([6, 20]))
+            .brushOn(false)
+            .dimension(dim)
+            .group(group)
+            .transitionDuration(500)
+            .x(d3.scaleBand())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Weight")
+            .yAxis().ticks(20);
+    }
 
-    dc.barChart("#weight")
-        .width(350)
-        .height(250)
-        .margins({top: 10, right: 50, bottom: 30, left: 50})
-        .dimension(dim)
-        .group(group)
-        .transitionDuration(500)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Weight (KG)")
-        .yAxis().ticks(20);
-}
+
+
+    /*--------------BAR CHARTS END-----------*/
+
+});
+
+
 

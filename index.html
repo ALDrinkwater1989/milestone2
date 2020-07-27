@@ -8,20 +8,15 @@
 	<title>Star Wars Dashboard</title>
 
 	<!--STYLES-->
-	<link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
-	<link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
+	<link rel="stylesheet" href="./static/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="./static/css/dc.min.css" type="text/css" />
 	<link rel="stylesheet" type="text/css"
 		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="static/css/style.css" type="text/css" />
+	<link rel="stylesheet" href="./static/css/style.css" type="text/css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
 		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-	<!--SCRIPTS-->
-	<script type="text/javascript" src="static/js/d3.js"></script>
-	<script type="text/javascript" src="static/js/crossfilter.js"></script>
-	<script type="text/javascript" src="static/js/dc.js"></script>
-	<script type="text/javascript" src="static/js/queue.js"></script>
-	<script type="text/javascript" src="static/js/graph.js"></script>
+	
 </head>
 
 <body class="set-background">
@@ -70,8 +65,9 @@
 
 			</header>
 		</div>
+        <div class = "row">
 		<!---Gender breakdown-->
-		<article class="row col-xs-12 col-sm-6 col-lg-4 eq-column-height">
+		<article class="row col-xs-12 col-sm-6 col-lg-6 eq-column-height">
 			<div class="content-wrapper">
 				<div><i class = "fas fa-angle-up hide-content-btn"></i></div>
 				<h3 class="heading-h3">Gender<h3>
@@ -104,7 +100,7 @@
 			</div>
 		</article>
 		<!-- Alligence -->
-		<article class="col-xs-12 col-sm-6 col-lg-4 eq-column-height">
+		<article class="col-xs-12 col-sm-6 col-lg-6 eq-column-height">
 			<div class="content-wrapper">
 				<div><i class="fas fa-angle-up hide-content-btn"></i></div>
 				<h3 class="heading-h3">Alligence</h3>
@@ -199,6 +195,7 @@
 		</div>
 		</div>
 	</section>
+    <div id="test"></div>
 	<!--Footer -->
 	<footer class="container-fluid footer">
 		<div class="container">
@@ -218,8 +215,54 @@
 		</div>
 	</footer>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
+    <!--SCRIPTS-->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script type="text/javascript" src="./static/js/d3.js"></script>
+	<script type="text/javascript" src="./static/js/crossfilter.js"></script>
+	<script type="text/javascript" src="./static/js/dc.js"></script>
+	<script type="text/javascript" src="./static/js/queue.js"></script>
+	<script type="text/javascript" src="./static/js/graph.js"></script>
+     -->
+
+    <!-- D3 -->
+    <!--<script src="{{ url_for('static', filename='js/d3.js') }}"></script>-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script> -->
+
+    <!-- Cross Filter -->
+    <!--<script src="{{ url_for('static', filename='js/crossfilter.js') }}"></script>-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.js"></script> -->
+
+    <!-- DC -->
+    <!-- <link rel="stylesheet"    href="{{ url_for('static', filename='css/dc.css') }}" type="text/css"></link> -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.css" />-->
+
+    <!-- <script type="text/javascript" src="./static/js/dc.js"></script> -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>-->
+
+    <!-- Queue -->
+    <!--<script src="{{ url_for('static', filename='js/queue.js') }}"></script>-->
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.js"></script>
+
+
+<script type="text/javascript" src="./static/js/d3.js"></script>
+<script type="text/javascript" src="./static/js/crossfilter.js"></script>
+<script type="text/javascript" src="./static/js/dc.js"></script>
+<script type="text/javascript" src="./static/js/graph1.js"></script>
+
+ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<!-- must load in this order: D3 | CROSSFILTER | DC -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.4.6/crossfilter.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.js"></script>
+	<script src="static/js/graph.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+	</script>
 
 </body>
 
