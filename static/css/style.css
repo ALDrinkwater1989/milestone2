@@ -66,7 +66,16 @@ p {
     font-size: 10px;
 }
 
+nav{
+   background: rgb(231,22,22);
+background: linear-gradient(151deg, rgba(231,22,22,0.6810925053615196) 0%, rgba(0,0,0,0.6810925053615196) 50%, rgba(0,212,255,0.664285782672444) 100%);
+}
+
 /*----------------Colours----------*/
+
+.yellow{
+    color: yellow;
+}
 
 .pink{
     color: pink;
@@ -81,7 +90,32 @@ p {
 }
 
 
+.dropdown-filter{
+    color: #000000;
+    font-size: 10px;
+}
 
+/*-----------Gender---------*/
+
+.gender-icon{
+    font-size: 3em;
+}
+
+.gender-percent{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+.gender-text{
+    margin:10px 0;
+}
+
+.gender-title{
+    color: black;
+    justify-content: center;
+}
 
 /*------------Footer-----------*/
 
@@ -90,7 +124,8 @@ p {
 .footer {
     min-height: 50px;
     margin-top: 12.5px;
-    background-color: black;
+background: rgb(231,22,22);
+background: linear-gradient(151deg, rgba(231,22,22,0.6810925053615196) 0%, rgba(0,0,0,0.6810925053615196) 50%, rgba(0,212,255,0.664285782672444) 100%);
     color: white;
 }
 

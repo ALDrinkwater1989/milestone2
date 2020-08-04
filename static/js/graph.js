@@ -19,25 +19,32 @@ $(document).ready(function () {
         });
 
 
-
-        gender_selector(ndx, "#gender-selector", "gender");
-        gender_selector(ndx, "#character-selector", "name");
-        gender_selector(ndx, "#alligence-selector", "Alligence");
-        gender_selector(ndx, "#film-selector", "film");
-
-
+/*-------------------SELECTORS-------------*/
+        multi_selector(ndx, "#gender-selector", "gender");
+        multi_selector(ndx, "#character-selector", "name");
+        multi_selector(ndx, "#alligence-selector", "Alligence");
+        multi_selector(ndx, "#film-selector", "film");
 
 
-        show_alligence(ndx, "#alligence", "Alligence");
-        show_phantom_menace_characters(ndx, "#tpm", "the_phantom_menace")
-        show_attack_of_clones_characters(ndx, "#atc", "the_attack_of_the_clones");
-        show_revenge_of_sith_characters(ndx, "#ros", "the_revenge_of_the_sith");
-        show_new_hope_characters(ndx, "#anh", "a_new_hope");
-        show_empire_strikes_back_characters(ndx, "#esb", "empire_strikes_back");
-        show_return_of_jedi_characters(ndx,"#roj", "return_of_the_jedi");
-        show_last_jedi_characters(ndx, "#tlj", "the_last_jedi");
-        show_force_awakens_characters(ndx, "#tfa", "the_force_awakens");
-        show_rise_of_skywalker_characters(ndx, "#skywalker", "the_rise_of_skywalker");
+/*----------GENDER PERCENT-------------*/
+
+display_gender_percent(ndx, "Male", "#male-percent");
+display_gender_percent(ndx, "Female", "#female-percent");
+display_gender_percent(ndx, "Hermaphrodite", "#percent-hermaphrodite");
+display_gender_percent(ndx, "None", "#percent-none");
+
+
+/*------------PIE CHARTS-----------*/
+        show_piecharts(ndx, "#alligence", "Alligence");
+        show_piecharts(ndx, "#tpm", "the_phantom_menace")
+        show_piecharts(ndx, "#atc", "the_attack_of_the_clones");
+        show_piecharts(ndx, "#ros", "the_revenge_of_the_sith");
+        show_piecharts(ndx, "#anh", "a_new_hope");
+        show_piecharts(ndx, "#esb", "empire_strikes_back");
+        show_piecharts(ndx, "#roj", "return_of_the_jedi");
+        show_piecharts(ndx, "#tlj", "the_last_jedi");
+        show_piecharts(ndx, "#tfa", "the_force_awakens");
+        show_piecharts(ndx, "#skywalker", "the_rise_of_skywalker");
         
         
         
@@ -55,12 +62,12 @@ $(document).ready(function () {
 
     /*--------------SELECTORS START-----*/
 
-    function gender_selector(ndx, divName, dimension) {
+    function multi_selector(ndx, divName, dimension) {
         var dim = ndx.dimension(dc.pluck(dimension));
         var group = dim.group();
-        var genderSelect = dc.selectMenu(divName)
+        var multiSelect = dc.selectMenu(divName)
 
-        genderSelect
+        multiSelect
             .dimension(dim)
             .group(group)
             .title(function (d) {
@@ -70,56 +77,51 @@ $(document).ready(function () {
 
     }
 
-    function character_selector(ndx, divName, dimension) {
-        var dim = ndx.dimension(dc.pluck(dimension));
-        var group = dim.group();
-        var characterSelect = dc.selectMenu(divName)
-
-        characterSelect
-            .dimension(dim)
-            .group(group)
-            .title(function (d) {
-                return d.key
-            });
-
-
-    }
-
-    function alligence_selector(ndx, divName, dimension) {
-        var dim = ndx.dimension(dc.pluck(dimension));
-        var group = dim.group();
-        var alligenceSelect = dc.selectMenu(divName)
-
-        alligenceSelect
-            .dimension(dim)
-            .group(group)
-            .title(function (d) {
-                return d.key
-            });
-
-
-    }
-    function film_selector(ndx, divName, dimension) {
-        var dim = ndx.dimension(dc.pluck(dimension));
-        var group = dim.group();
-        var filmSelect = dc.selectMenu(divName)
-
-        filmSelect
-            .dimension(dim)
-            .group(group)
-            .title(function (d) {
-                return d.key
-            });
-
-
-    }
+   
 
 
     /*------------SELECTORS END-------------*/
+    /*------------GENDER PERCENT------------*/
+        function display_gender_percent(ndx, gender, element){
+            var genderPercent = ndx.groupAll().reduce(
+                function(p,v){
+                    p.total++;
+                    if (v.gender === gender){
+                        p.gender_count ++;
+                    }
+                    return p;
+                },
+                function(p, v){
+                    p.total--;
+                    if(v.gender === gender){
+                        p.gender_count--;
+                    }
+                    return p;
+                },
+                function(){
+                    return{total: 0, gender_count: 0};
+                }
+            );
 
-    /*----------------------PIE CHARTS START-----------*/
+            dc.numberDisplay(element)
+                .formatNumber(d3.format('.2%'))
+                .valueAccessor(function(d){
+                    if (d.gender_count ==0){
+                        return 0;
+                    } else {
+                        return (d.gender_count / d.total);
+                    }
+                })
+                .group(genderPercent);
 
-    /*------Pie chart formatting----*/
+        }
+    
+    
+    
+    /*------------PIE CHARTS START----------*/
+    
+    
+    /*------------PIE CHART FORMATTING------*/
 
     function show_slice_percent(key, endAngle, startAngle) {
         var percent = dc.utils.printSingleValue((endAngle - startAngle) / (2 * Math.PI) * 100);
@@ -146,44 +148,9 @@ function remove_blanks(group, value_to_remove) {
     };
 }
 
+        function show_piecharts(ndx, divName, dimension) {
 
-    function show_alligence(ndx, divName, dimension) {
-
-        let alligencePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = dim.group();
-      
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        alligencePiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-            
- 
-
-    }
-
-        function show_phantom_menace_characters(ndx, divName, dimension) {
-
-        let phantomPiechart = dc.pieChart(divName);
+        let moviePiechart = dc.pieChart(divName);
         let dim = ndx.dimension(dc.pluck(dimension));
         let group = remove_blanks(dim.group(), "");
 
@@ -192,7 +159,7 @@ function remove_blanks(group, value_to_remove) {
             dc.redrawAll();
         })
 
-        phantomPiechart
+        moviePiechart
             .width(500)
             .height(350)
             .radius(170)
@@ -213,265 +180,6 @@ function remove_blanks(group, value_to_remove) {
 
     }
 
-        function show_attack_of_clones_characters(ndx, divName, dimension) {
-
-        let clonesPiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        clonesPiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-
-        function show_revenge_of_sith_characters(ndx, divName, dimension) {
-
-        let revengePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        revengePiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-
-        function show_new_hope_characters(ndx, divName, dimension) {
-
-        let hopePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        hopePiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-
-        function show_empire_strikes_back_characters(ndx, divName, dimension) {
-
-        let empirePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        empirePiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-
-        function show_return_of_jedi_characters(ndx, divName, dimension) {
-
-        let returnPiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-       let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        returnPiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-     function show_rise_of_skywalker_characters(ndx, divName, dimension) {
-
-        let skywalkerPiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        skywalkerPiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-     function show_force_awakens_characters(ndx, divName, dimension) {
-
-        let forcePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        forcePiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
-
-     function show_last_jedi_characters(ndx, divName, dimension) {
-
-        let jediPiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
-
-        d3.selectAll("#resetPie").on("click", function () {
-            gamesPiechart.filterAll();
-            dc.redrawAll();
-        })
-
-        jediPiechart
-            .width(500)
-            .height(350)
-            .radius(170)
-            .cx(210)
-            .transitionDuration(500)
-            .on('pretransition', function (chart) {
-                chart.selectAll('text.pie-slice').text(function (d) {
-                    return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
-
-                });
-            })
-            .useViewBoxResizing(true)
-            .group(group)
-            .dimension(dim)
-            .drawPaths(true)
-            .minAngleForLabel(0)
-
-
-    }
     /*----------PIE CHARTS END----------*/
 
     /*----------BAR CHARTS START--------*/
@@ -500,15 +208,15 @@ function remove_blanks(group, value_to_remove) {
         heightChart
             .width(500)
             .height(350)
-            .x(d3.scaleLinear().domain([6, 20]))
-            .brushOn(false)
             .dimension(dim)
             .group(group)
+            .renderLabel(true)
+            .elasticY(true)
             .transitionDuration(500)
             .x(d3.scaleBand())
             .xUnits(dc.units.ordinal)
             .xAxisLabel("Height")
-            .yAxis().ticks(20);
+            .yAxis().ticks(4);
     }
 
  function show_weight(ndx, divName) {
@@ -534,15 +242,18 @@ function remove_blanks(group, value_to_remove) {
         weightChart
             .width(500)
             .height(350)
-            .x(d3.scaleLinear().domain([6, 20]))
             .brushOn(false)
             .dimension(dim)
             .group(group)
+            .renderLabel(true)
+            .title(function(d) {
+            return d.value + " Characters weigh " + d.key;
+        })
             .transitionDuration(500)
             .x(d3.scaleBand())
             .xUnits(dc.units.ordinal)
             .xAxisLabel("Weight")
-            .yAxis().ticks(20);
+            .yAxis().ticks(4);
     }
     /*--------------BAR CHARTS END-----------*/
 
@@ -559,7 +270,7 @@ function moreInformation(ndx, divName, dimension){
         .section(function(d){
             return d.name;
         })
-        .columns(["birth_year","homeworld","Job","Vehicles", "Startships"])
+        .columns(["birth_year","homeworld","Job","Vehicles", "Starships"])
         .size(Infinity)
         .useViewBoxResizing(true)
         .sortBy(function(d){
