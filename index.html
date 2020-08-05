@@ -21,7 +21,7 @@
 
 <body class="set-background">
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary banner-colour">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Star Wars Dashboard</a>
@@ -33,10 +33,9 @@
 
 	<!--Introduction-->
 	<section class="container set-min-height">
-		<div class="row eq-col-height">
+		<div class="row eq-column-height">
 			<header class="col-xs12 col-lg-12 eq-col-height">
 				<div class="content-wrapper">
-					<div><i class = "fas fa-angle-up hide-content-btn"></i></div>
 					<h3 class="heading-h3">Introduction<h3>
 							<div class="hide-content-toggle">
 								<hr>
@@ -47,19 +46,19 @@
 							</div>
 							<div class="row">
 								<div class="dropdown-filter col-lg-3">
-									<div> Filter By Character: </div>
+									<div>Character: </div>
 									<div id="character-selector"></div>
 								</div>
 								<div class="dropdown-filter col-lg-3">
-									<div> Filter By gender: </div>
+									<div>gender: </div>
 									<div id="gender-selector"></div>
 								</div>
 								<div class="dropdown-filter col-lg-3">
-									<div> Filter By Film: </div>
+									<div>Film: </div>
 									<div id="film-selector"></div>
 								</div>
 								<div class="dropdown-filter col-lg-3">
-									<div> Filter By alligence: </div>
+									<div>alligence: </div>
 									<div id="alligence-selector"></div>
 								</div>
 							</div>
@@ -77,37 +76,42 @@
 								<hr>
 								<div class="row">
 									<div class="col=xs-4 col-lg-3">
-                                    <h5 class = "gender-title">Female</h5>
+										<h5 class="gender-title">Female</h5>
 										<div><i class = "fas fa-venus gender-icon pink"></i></div>
 										<div class="gender-percent">
 											<div id="female-percent"></div>
 										</div>
 									</div>
 									<div class="col=xs-4 col-lg-3">
-                                    <h5 class = "gender-title">Male</h5>
+										<h5 class="gender-title">Male</h5>
 										<div><i class = "fas fa-mars gender-icon blue"></i></div>
 										<div class="gender-percent">
 											<div id="male-percent"></div>
 										</div>
 									</div>
 									<div class="col-xs-4 col-lg-3">
-                                    <h5 class = "gender-title">Transgender</h5>
+										<h5 class="gender-title">Transgender</h5>
 										<div><i class="fas fa-transgender gender-icon yellow"></i></div>
 										<div class="gender-percent">
 											<div id="percent-hermaphrodite"></div>
 										</div>
 									</div>
-                                    	<div class="col-xs-4 col-lg-3">
-                                        <h5 class = "gender-title">No Gender</h5>
+									<div class="col-xs-4 col-lg-3">
+										<h5 class="gender-title">No Gender</h5>
 										<div><i class="fas fa-genderless gender-icon green"></i></div>
 										<div class="gender-percent">
 											<div id="percent-none"></div>
 										</div>
 									</div>
 								</div>
-								</hr>
-								<div class="col-sm-12 col-md-3" id="gender-balance"></div>
-								<div class="col-sm-12 col-md-3" id="age-dist"></div>
+								<p class="gender-text"> The vast majority of characters in the Star Wars univserse
+									are male, which is not unexpected as the original trilogy was filmed at a fime
+									when Sci-Fi was dominated by male fans.
+								</P>
+								<p class="gender-text">There is one transgender cahracter in the universe, albeit
+									Jabba The Hutt</p>
+
+
 							</div>
 				</div>
 			</article>
@@ -116,7 +120,7 @@
 				<div class="content-wrapper">
 					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
 					<h3 class="heading-h3">Alligence</h3>
-					<div class="hide-content-toggle">
+					<div class="col-lg-12 hide-content-toggle">
 						<hr>
 						<div id="alligence" class="chart"></div>
 					</div>
@@ -125,8 +129,12 @@
 
 		</div>
 
-		<div class="row">
-
+		<div class="row content-wrapper">
+			<div class="row col-lg-12">
+				<h3 class="heading-h3">Films</h3>
+			
+			</div>
+            <hr>
 			<article class="col-xs-12 col-sm-4 col-lg-4 eq-column-height">
 				<div class="content-wrapper">
 					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
@@ -174,7 +182,7 @@
 			<article class="col-xs-12 col-sm-4 col-lg-4 eq-column-height">
 				<div class="content-wrapper">
 					<div><i class="fas fa-angle-up hide-content-btn"></i></div>
-					<h3 class="heading-h3">Emire Strikes Back</h3>
+					<h3 class="heading-h3">Empire Strikes Back</h3>
 					<div class="hide-content-toggle">
 						<hr>
 						<div id="esb" class="chart"></div>
@@ -262,7 +270,7 @@
 					<h3 class="heading-h3">Hair Color</h3>
 					<div class="hide-content-toggle">
 						<hr>
-						<div id="hair-color" class="chart"></div>
+						<div id="hair-colour" class="chart"></div>
 
 					</div>
 				</div>
@@ -274,7 +282,7 @@
 					<h3 class="heading-h3">Eye Color</h3>
 					<div class="hide-content-toggle">
 						<hr>
-						<div id="eye-color" class="chart"></div>
+						<div id="eye-colour" class="chart"></div>
 
 					</div>
 				</div>
@@ -290,7 +298,7 @@
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header banner-colour">
 					<h5 class="modal-title" id="exampleModalLabel">Additional Information</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -308,7 +316,7 @@
 	</div>
 
 	<!--Footer -->
-	<footer class="container-fluid footer">
+	<footer class="container-fluid footer banner-colour">
 		<div class="container">
 			<div class="row footer-content">
 				<div class="col-xs-12 col-sm-4">
@@ -363,6 +371,7 @@
 
  -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="static/js/reset.js"></script>
 	<!-- must load in this order: D3 | CROSSFILTER | DC -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.4.6/crossfilter.js"></script>

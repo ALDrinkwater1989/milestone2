@@ -45,10 +45,11 @@ display_gender_percent(ndx, "None", "#percent-none");
         show_piecharts(ndx, "#tlj", "the_last_jedi");
         show_piecharts(ndx, "#tfa", "the_force_awakens");
         show_piecharts(ndx, "#skywalker", "the_rise_of_skywalker");
+        show_piecharts(ndx, "#hair-colour", "hair_color");
+        show_piecharts(ndx, "#eye-colour", "eye_color");
         
         
-        
-        
+/*------------BAR CHARTS-----------*/        
         show_weight(ndx, "#weight");
         show_height(ndx, "#height");
 
@@ -76,11 +77,8 @@ display_gender_percent(ndx, "None", "#percent-none");
 
 
     }
-
-   
-
-
     /*------------SELECTORS END-------------*/
+    
     /*------------GENDER PERCENT------------*/
         function display_gender_percent(ndx, gender, element){
             var genderPercent = ndx.groupAll().reduce(
@@ -176,6 +174,12 @@ function remove_blanks(group, value_to_remove) {
             .dimension(dim)
             .drawPaths(true)
             .minAngleForLabel(0)
+           .legend(dc.legend().x(420).y(10).itemHeight(35).gap(8))
+        .on('pretransition', function(chart) {
+            chart.selectAll('text.pie-slice').text(function(d) {
+                return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
+            });
+        })
 
 
     }
@@ -253,7 +257,7 @@ function remove_blanks(group, value_to_remove) {
             .x(d3.scaleBand())
             .xUnits(dc.units.ordinal)
             .xAxisLabel("Weight")
-            .yAxis().ticks(4);
+            .yAxis().ticks(5);
     }
     /*--------------BAR CHARTS END-----------*/
 
