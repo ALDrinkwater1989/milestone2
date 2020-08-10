@@ -210,20 +210,30 @@ function remove_blanks(group, value_to_remove) {
         var group = dim.group();
 
         heightChart
-            .width(500)
-            .height(350)
-            .dimension(dim)
-            .group(group)
-            .renderLabel(true)
-            .elasticY(true)
-            .transitionDuration(500)
-            .x(d3.scaleBand())
-            .xUnits(dc.units.ordinal)
-            .xAxisLabel("Height")
-            .yAxis().ticks(4);
+           .width(500)
+        .height(350)
+        .useViewBoxResizing(true)
+        .margins({ top: 15, right: 40, bottom: 40, left: 40 })
+        .clipPadding(15)
+        .dimension(dim)
+        .group(group)
+        .colorAccessor(function(d) {
+            return d.key;
+        })
+        .renderLabel(true)
+        .title(function(d) {
+            return d.value + " Characters are " + d.key + " in height";
+        })
+        .elasticY(true)
+        .x(d3.scaleBand())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel('Height')
+        .yAxis().ticks(4);
     }
 
  function show_weight(ndx, divName) {
+
+       
 
         var weightChart = dc.barChart(divName);
         var dim = ndx.dimension(function (d) {
@@ -244,20 +254,26 @@ function remove_blanks(group, value_to_remove) {
         var group = dim.group();
 
         weightChart
-            .width(500)
-            .height(350)
-            .brushOn(false)
-            .dimension(dim)
-            .group(group)
-            .renderLabel(true)
-            .title(function(d) {
-            return d.value + " Characters weigh " + d.key;
+             .width(500)
+        .height(350)
+        .useViewBoxResizing(true)
+        .margins({ top: 15, right: 40, bottom: 40, left: 40 })
+        .clipPadding(15)
+        .dimension(dim)
+        .colorAccessor(function(d) {
+            return d.key;
         })
-            .transitionDuration(500)
-            .x(d3.scaleBand())
-            .xUnits(dc.units.ordinal)
-            .xAxisLabel("Weight")
-            .yAxis().ticks(5);
+        /* .colors(weightColors) */
+        .renderLabel(true)
+        .title(function(d) {
+            return d.value + " Superheroes weigh " + d.key;
+        })
+        .group(group)
+        .elasticY(true)
+        .x(d3.scaleBand())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel('Weight')
+        .yAxis().ticks(4);
     }
     /*--------------BAR CHARTS END-----------*/
 
