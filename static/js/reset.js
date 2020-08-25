@@ -1,6 +1,6 @@
-$('#reset-filters').click(function(){
+$('#reset').click(function(){
 
-    dc.filerAll();
+    dc.filterAll();
     dc.renderAll();
 });
 
