@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
     d3.csv("./static/data/characters.csv").then(chartBuilder);
-   /*  dc.config.defaultColors(d3.schemeRdBu[5]); */
+    dc.config.defaultColors(d3.interpolateRdBu(0.5));
 
     function chartBuilder(swData) {
         var ndx = crossfilter(swData);
@@ -192,6 +192,7 @@ function remove_blanks(group, value_to_remove) {
     function show_height(ndx, divName) {
 
         var heightChart = dc.barChart(divName);
+        
         var dim = ndx.dimension(function (d) {
             switch (true) {
                 case (d.height == 0):
@@ -210,7 +211,7 @@ function remove_blanks(group, value_to_remove) {
         var group = dim.group();
 
         heightChart
-           .width(500)
+        .width(500)
         .height(350)
         .useViewBoxResizing(true)
         .margins({ top: 15, right: 40, bottom: 40, left: 40 })
