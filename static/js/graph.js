@@ -2,11 +2,11 @@ $(document).ready(function () {
 
 
     d3.csv("./static/data/characters.csv").then(chartBuilder);
-    dc.config.defaultColors(d3.interpolateRdBu(0.5));
+   
 
     function chartBuilder(swData) {
         var ndx = crossfilter(swData);
-        let allData = ndx.groupAll();
+        var allData = ndx.groupAll();
 
         dc.dataCount("#total")
             .crossfilter(ndx)
@@ -36,7 +36,7 @@ display_gender_percent(ndx, "None", "#percent-none");
 
 /*------------PIE CHARTS-----------*/
         show_piecharts(ndx, "#alligence", "Alligence");
-        show_piecharts(ndx, "#tpm", "the_phantom_menace")
+        show_piecharts(ndx, "#tpm", "the_phantom_menace");
         show_piecharts(ndx, "#atc", "the_attack_of_the_clones");
         show_piecharts(ndx, "#ros", "the_revenge_of_the_sith");
         show_piecharts(ndx, "#anh", "a_new_hope");
@@ -66,13 +66,13 @@ display_gender_percent(ndx, "None", "#percent-none");
     function multi_selector(ndx, divName, dimension) {
         var dim = ndx.dimension(dc.pluck(dimension));
         var group = dim.group();
-        var multiSelect = dc.selectMenu(divName)
+        var multiSelect = dc.selectMenu(divName);
 
         multiSelect
             .dimension(dim)
             .group(group)
             .title(function (d) {
-                return d.key
+                return d.key;
             });
 
 
@@ -148,14 +148,14 @@ function remove_blanks(group, value_to_remove) {
 
         function show_piecharts(ndx, divName, dimension) {
 
-        let moviePiechart = dc.pieChart(divName);
-        let dim = ndx.dimension(dc.pluck(dimension));
-        let group = remove_blanks(dim.group(), "");
+        var moviePiechart = dc.pieChart(divName);
+        var dim = ndx.dimension(dc.pluck(dimension));
+        var group = remove_blanks(dim.group(), "");
 
         d3.selectAll("#resetPie").on("click", function () {
             gamesPiechart.filterAll();
             dc.redrawAll();
-        })
+        });
 
         moviePiechart
             .width(500)
@@ -179,7 +179,7 @@ function remove_blanks(group, value_to_remove) {
             chart.selectAll('text.pie-slice').text(function(d) {
                 return show_slice_percent(d.data.key, d.endAngle, d.startAngle);
             });
-        })
+        });
 
 
     }
@@ -282,8 +282,8 @@ function remove_blanks(group, value_to_remove) {
 
 function moreInformation(ndx, divName, dimension){
 
-    let dataTableName = dc.dataTable(divName);
-    let dim = ndx.dimension(dc.pluck(dimension));
+    var dataTableName = dc.dataTable(divName);
+    var dim = ndx.dimension(dc.pluck(dimension));
 
 
     dataTableName
