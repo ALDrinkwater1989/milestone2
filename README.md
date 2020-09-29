@@ -21,15 +21,15 @@ the UI is developed in a responsive manner. it works on PC and mobile devices.
 
 ### Mockups
 
-As part of the project wireframes were created that can be found [here]() overall I was happy with the inital layout.
+As part of the project wireframes were created that can be found [here](https://github.com/ALDrinkwater1989/milestone2/tree/master/static/images/mockups) overall I was happy with the inital layout.
 
 However as the project went on i changes the layout, i removed the middle box at the top and moved the filters to the introduction section.
 
 I also decided during the project that i wanted to show more information, which is why there is no wire frame for the modal.
 
 ![top](static/images/mockups/SWtop.png)
-![films](static/images/mockups/films.png)
-![bottom](static/images/mockups/bottom.png)
+![films](static/images/mockups/Films.png)
+![bottom](static/images/mockups/Bottom.png)
 
 ## Features
 
