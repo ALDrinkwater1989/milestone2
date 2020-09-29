@@ -74,6 +74,8 @@ The webpage was tested on numerous web browsers to confirm that there were no is
 
 As I use firefox as my main web browser I used the Firefox console to simulate difference device sizes, all of which worked as expected. 
 
+A copy of the tests completed can be found [here](testing.md)
+
 ## Known Bugs
 
 As of writing this README, the only known bug is that the film section will not collapse all as one, but only individually. There is one small issue with the site on an Ipad Mini size where the alligence dropdown box expands out size of the background.
